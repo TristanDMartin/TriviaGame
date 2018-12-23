@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     var options = [
         {
             question: "What were the boys doing when they first got served",
@@ -10,7 +11,7 @@ $(document).ready(function () {
             question: "Who did the boys go to for help after getting served?",
             choice: ["Jimmy", "Butters", "Mr. Mackey", "Chef"],
             answer: 3,
-            photo: "assets/images/butters.png"
+            photo: "assets/images/Wendy.png"
         },
         {
             question: "To what song did Randy teach Stan a dance?",
@@ -22,7 +23,7 @@ $(document).ready(function () {
             question: "Was Stan able to serveback the OC crew with his dad's routine?",
             choice: ["Yes", "No",],
             answer: 1,
-            photo: "assets/images/stan-warrior.png"
+            photo: "assets/images/dancingcartman.png"
         },
         {
             question: "Was Randy able to call off the dance competition?",
@@ -46,7 +47,7 @@ $(document).ready(function () {
             question: "What was NOT one of the deaths shown as a result of Butters' performance at Nationals?",
             choice: ["impalement", "trampling", "drowning", "electrocution"],
             answer: 3,
-            photo: "assets/images/stan-warrior.png"
+            photo: "assets/images/Mysterion.png"
         },
         {
             question: "Did the South Park crew win the competition?",
@@ -58,7 +59,7 @@ $(document).ready(function () {
             question: "What dancing animal was added to the crew?",
             choice: ["duck", "rabbit", "manatee", "horse"],
             answer: 0,
-            photo: "assets/images/the-coon.png"
+            photo: "assets/images/travelingbuters.png"
         }];
 
     var correctCount = 0;
@@ -95,25 +96,24 @@ $(document).ready(function () {
     }
     //timer countdown
     function decrement() {
-        $("#timeleft").html("<h3>Time remaining: " + timer + "</h3>");
+        $("#timerL").html("<h3>Time remaining: " + timer + "</h3>");
         timer--;
 
         //stop timer if reach 0
         if (timer === 0) {
             unanswerCount++;
             stop();
-            $("#answerblock").html("<p>Time is up! The correct answer is: " + pick.choice[pick.answer] + "</p>");
+            $("#answers").html("<p>Time out! The correct answer is: " + pick.choice[pick.answer] + "</p>");
             hidepicture();
         }
     }
 
-    //timer stop
+    //when the timer needs to  stop
     function stop() {
         running = false;
         clearInterval(intervalId);
     }
-    //randomly pick question in array if not already shown
-    //display question and loop though and display possible answers
+    //display question and possible answers
     function displayQuestion() {
         //generate random index in array
         index = Math.floor(Math.random() * options.length);
@@ -125,14 +125,14 @@ $(document).ready(function () {
         //	} else {
         //		console.log(pick.question);
         //iterate through answer array and display
-        $("#questionblock").html("<h2>" + pick.question + "</h2>");
+        $("#questions").html("<h2>" + pick.question + "</h2>");
         for (var i = 0; i < pick.choice.length; i++) {
             var userChoice = $("<div>");
             userChoice.addClass("answerchoice");
             userChoice.html(pick.choice[i]);
             //assign array position to it so can check answer
             userChoice.attr("data-guessvalue", i);
-            $("#answerblock").append(userChoice);
+            $("#answers").append(userChoice);
             //		}
         }
 
@@ -148,14 +148,14 @@ $(document).ready(function () {
                 stop();
                 correctCount++;
                 userGuess = "";
-                $("#answerblock").html("<p>Correct!</p>");
+                $("#answers").html("<p>Correct!</p>");
                 hidepicture();
 
             } else {
                 stop();
                 wrongCount++;
                 userGuess = "";
-                $("#answerblock").html("<p>Wrong! The correct answer is: " + pick.choice[pick.answer] + "</p>");
+                $("#answers").html("<p>Wrong! The answer is: " + pick.choice[pick.answer] + "</p>");
                 hidepicture();
             }
         })
@@ -163,21 +163,21 @@ $(document).ready(function () {
 
 
     function hidepicture() {
-        $("#answerblock").append("<img src=" + pick.photo + ">");
+        $("#answers").append("<img src=" + pick.photo + ">");
         newArray.push(pick);
         options.splice(index, 1);
 
         var hidpic = setTimeout(function () {
-            $("#answerblock").empty();
+            $("#answers").empty();
             timer = 20;
 
             //run the score screen if all questions answered
             if ((wrongCount + correctCount + unanswerCount) === qCount) {
-                $("#questionblock").empty();
-                $("#questionblock").html("<h3>Game Over!  Here's how you did: </h3>");
-                $("#answerblock").append("<h4> Correct: " + correctCount + "</h4>");
-                $("#answerblock").append("<h4> Incorrect: " + wrongCount + "</h4>");
-                $("#answerblock").append("<h4> Unanswered: " + unanswerCount + "</h4>");
+                $("#questions").empty();
+                $("#questions").html("<h3>Game Over!  How did you do: </h3>");
+                $("#answers").append("<h4> Correct: " + correctCount + "</h4>");
+                $("#answers").append("<h4> Incorrect: " + wrongCount + "</h4>");
+                $("#answers").append("<h4> Unanswered: " + unanswerCount + "</h4>");
                 $("#reset").show();
                 correctCount = 0;
                 wrongCount = 0;
@@ -195,8 +195,8 @@ $(document).ready(function () {
 
     $("#reset").on("click", function () {
         $("#reset").hide();
-        $("#answerblock").empty();
-        $("#questionblock").empty();
+        $("#answers").empty();
+        $("#questions").empty();
         for (var i = 0; i < holder.length; i++) {
             options.push(holder[i]);
         }

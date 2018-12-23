@@ -1,6 +1,4 @@
 .answerchoice {
-	border: 1px solid rgb(102, 100, 100);
-  border-radius: 5%;
 	width: 40%;
 	color: black;
   text-align: center;
@@ -32,13 +30,14 @@ img {
 body {
   background-image: url("../images/Bus-stop.jpg");
   background-size: cover;
-  font-family: 'Karla', sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 h1 {
   text-align: center;
-  color: gray;
+  color: black;
   font-weight: bolder;
+  font-style: italic
   padding: 20px;
   font-size: 45px;
 }
@@ -58,8 +57,7 @@ h2, h4 {
 .wrapper {
   margin: 10px auto;
   background-color: rgba(255, 255, 255, 0.7);
-  border: 2px solid #403fd3;
-  height: 500px;
+  height: 400px;
   width: 60%;
   text-align: center;
 }
