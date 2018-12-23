@@ -119,11 +119,7 @@ $(document).ready(function () {
         index = Math.floor(Math.random() * options.length);
         pick = options[index];
 
-        //	if (pick.shown) {
-        //		//recursive to continue to generate new index until one is chosen that has not shown in this game yet
-        //		displayQuestion();
-        //	} else {
-        //		console.log(pick.question);
+        
         //iterate through answer array and display
         $("#questions").html("<h2>" + pick.question + "</h2>");
         for (var i = 0; i < pick.choice.length; i++) {
@@ -138,7 +134,7 @@ $(document).ready(function () {
 
 
 
-        //click function to select answer and outcomes
+        //click function to select answer 
         $(".answerchoice").on("click", function () {
             //grab array position from userGuess
             userGuess = parseInt($(this).attr("data-guessvalue"));
